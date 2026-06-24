@@ -21,3 +21,11 @@ function getHumanChoice() {
     // return user input
     return userChoice;
 }
+
+// variable to keep track of computer score, initialized to 0
+computerScore = 0;
+// variable to keep track of player score, initialized to 0
+humanScore = 0;
+
+
+
