@@ -1,7 +1,7 @@
 // get computer choice: randomly return rock, paper, or scissors
 function getCompChoice() {
     // randomly generate a number from 1-3 and store in variable
-    num = Math.floor(Math.random()*3) + 1;
+    let num = Math.floor(Math.random()*3) + 1;
     // if number is 1, return "rock"
     if (num === 1) {
         return "rock";
@@ -17,7 +17,7 @@ function getCompChoice() {
 // get human choice: return rock, paper, or scissors based on user input
 function getHumanChoice() {
     // ask for and get user's input, store in variable
-    userChoice = prompt("Choose rock, paper, or scissors.");
+    let userChoice = prompt("Choose rock, paper, or scissors.").toLowerCase();
     // return user input
     return userChoice;
 }
@@ -29,6 +29,8 @@ function playRound(humanChoice, compChoice) {
     if (humanChoice === compChoice) {
         // announce tie
         console.log(`It's a tie! You both chose ${compChoice}`);
+        // indicate tie with return value of "tie"
+        return "tie";
     // else, if humanChoice is rock and compChoice is scissors, human wins
     } else if (humanChoice === "rock" && compChoice === "scissors" ||
             // or, if humanChoice is scissors and compChoice is paper, human wins
@@ -38,14 +40,14 @@ function playRound(humanChoice, compChoice) {
     ) {
         // announce human as winner
         console.log(`You win! ${humanChoice} beats ${compChoice}.`);
-        // indicate player won with return value of 1
-        return 1;
+        // indicate player won with return value of "human"
+        return "human";
     // else, computer wins
     } else {
         // announce computer as winner
         console.log(`The computer wins! ${compChoice} beats ${humanChoice}`);
-        // indicate computer won with return value of 0
-        return 0;
+        // indicate computer won with return value of "computer"
+        return "computer";
     }
 }
 
@@ -60,7 +62,7 @@ function playGame() {
     // variable to keep track of computer score, initialized to 0
     let compScore = 0;
 
-    for (i = 1; i < 6; i++) {
+    for (let i = 1; i < 6; i++) {
 
         // announce round number
         console.log(`Round ${i}:`);
@@ -74,14 +76,23 @@ function playGame() {
         let winner = playRound(humanSelection, compSelection);
 
         // increment scores based on winner
-        if (winner === 1) {
+        if (winner === "human") {
             humanScore++;
-        } else if (winner === 0) {
+        } else if (winner === "computer") {
             compScore++;
         }
 
         // announce scores at the end of a round
         console.log(`Your score is ${humanScore}. The computer's score is ${compScore}.`);
+    }
+
+    // announce winner of game overall
+    if (humanScore > compScore) {
+        console.log("Game over - you won!");
+    } else if (compScore > humanScore) {
+        console.log("Game over - computer won!");
+    } else {
+        console.log("Game over - it's a tie!");
     }
 
 }
