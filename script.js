@@ -1,5 +1,5 @@
 // get computer choice: randomly return rock, paper, or scissors
-function getComputerChoice() {
+function getCompChoice() {
     // randomly generate a number from 1-3 and store in variable
     num = Math.floor(Math.random()*3) + 1;
     // if number is 1, return "rock"
@@ -22,11 +22,6 @@ function getHumanChoice() {
     return userChoice;
 }
 
-// variable to keep track of computer score, initialized to 0
-let computerScore = 0;
-// variable to keep track of player score, initialized to 0
-let humanScore = 0;
-
 // plays a single round, taking human and computer choice as arguments
 // increments the winner's score, and returns a winner announcement
 function playRound(humanChoice, compChoice) {
@@ -36,25 +31,61 @@ function playRound(humanChoice, compChoice) {
         console.log(`It's a tie! You both chose ${compChoice}`);
     // else, if humanChoice is rock and compChoice is scissors, human wins
     } else if (humanChoice === "rock" && compChoice === "scissors" ||
-            // or, if humanChoice is scissors and compchoice is paper, human wins
+            // or, if humanChoice is scissors and compChoice is paper, human wins
                humanChoice === "paper" && compChoice === "rock" ||
             // or, if humanChoice is paper and compChoice is rock, human wins
                humanChoice === "scissors" && compChoice === "paper"
     ) {
         // announce human as winner
         console.log(`You win! ${humanChoice} beats ${compChoice}.`);
-        // increment player score
-        humanScore++;
+        // indicate player won with return value of 1
+        return 1;
     // else, computer wins
     } else {
         // announce computer as winner
-        console.log(`The computer wins! ${compChoice} beats ${humanChoices}`);
-        // increment computer score
-        compScore++;
+        console.log(`The computer wins! ${compChoice} beats ${humanChoice}`);
+        // indicate computer won with return value of 0
+        return 0;
     }
 }
 
-// define variable for human choice
-let humanSelection = getHumanChoice();
-// define variable for computer choice
-let compSelection = getCompChoice();
+// play five rounds of the game
+function playGame() {
+    
+    // announce game
+    console.log("Welcome to rock, paper, scissors!");
+
+    // variable to keep track of player score, initialized to 0
+    let humanScore = 0;
+    // variable to keep track of computer score, initialized to 0
+    let compScore = 0;
+
+    for (i = 1; i < 6; i++) {
+
+        // announce round number
+        console.log(`Round ${i}:`);
+
+        // define variable for human choice
+        const humanSelection = getHumanChoice();
+        // define variable for computer choice
+        const compSelection = getCompChoice();
+
+        // call playRound() to play one round
+        let winner = playRound(humanSelection, compSelection);
+
+        // increment scores based on winner
+        if (winner === 1) {
+            humanScore++;
+        } else if (winner === 0) {
+            compScore++;
+        }
+
+        // announce scores at the end of a round
+        console.log(`Your score is ${humanScore}. The computer's score is ${compScore}.`);
+    }
+
+}
+
+// run function playGame()
+playGame();
+
