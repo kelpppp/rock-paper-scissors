@@ -1,4 +1,4 @@
-// randomly return rock, paper, or scissors
+// get computer choice: randomly return rock, paper, or scissors
 function getComputerChoice() {
     // randomly generate a number from 1-3 and store in variable
     num = Math.floor(Math.random()*3) + 1;
@@ -14,3 +14,10 @@ function getComputerChoice() {
     }
 }
 
+// get human choice: return rock, paper, or scissors based on user input
+function getHumanChoice() {
+    // ask for and get user's input, store in variable
+    userChoice = prompt("Choose rock, paper, or scissors.");
+    // return user input
+    return userChoice;
+}
