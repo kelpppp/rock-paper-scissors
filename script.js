@@ -23,9 +23,38 @@ function getHumanChoice() {
 }
 
 // variable to keep track of computer score, initialized to 0
-computerScore = 0;
+let computerScore = 0;
 // variable to keep track of player score, initialized to 0
-humanScore = 0;
+let humanScore = 0;
 
+// plays a single round, taking human and computer choice as arguments
+// increments the winner's score, and returns a winner announcement
+function playRound(humanChoice, compChoice) {
+    // if humanChoice and compChoice are the same, it's a tie
+    if (humanChoice === compChoice) {
+        // announce tie
+        console.log(`It's a tie! You both chose ${compChoice}`);
+    // else, if humanChoice is rock and compChoice is scissors, human wins
+    } else if (humanChoice === "rock" && compChoice === "scissors" ||
+            // or, if humanChoice is scissors and compchoice is paper, human wins
+               humanChoice === "paper" && compChoice === "rock" ||
+            // or, if humanChoice is paper and compChoice is rock, human wins
+               humanChoice === "scissors" && compChoice === "paper"
+    ) {
+        // announce human as winner
+        console.log(`You win! ${humanChoice} beats ${compChoice}.`);
+        // increment player score
+        humanScore++;
+    // else, computer wins
+    } else {
+        // announce computer as winner
+        console.log(`The computer wins! ${compChoice} beats ${humanChoices}`);
+        // increment computer score
+        compScore++;
+    }
+}
 
-
+// define variable for human choice
+let humanSelection = getHumanChoice();
+// define variable for computer choice
+let compSelection = getCompChoice();
